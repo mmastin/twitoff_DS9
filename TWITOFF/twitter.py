@@ -12,12 +12,11 @@ TWITTER_AUTH.set_access_token(config('TWITTER_ACCESS_TOKEN'),
 TWITTER = tweepy.API(TWITTER_AUTH)
 BASILICA = basilica.Connection(config('BASILICA_KEY'))
 
-# to do - add functions
 def add_or_update_user(username):
     """add or update a user and their tweets, or else give error"""
     try:
-        twitter_user=TWITTER.get_user(username)
-        db_user = (User.query.get(twitter_user.id) or User(id=twitter.id, name=username))
+        twitter_user = TWITTER.get_user(username)
+        db_user = (User.query.get(twitter_user.id) or User(id=twitter_user.id, name=username))
         DB.session.add(db_user)
         tweets = twitter_user.timeline(count=200, exclude_replies=True, include_rts=False, tweet_mode='extended', since_id=db_user.newest_tweet_id)
         if tweets:

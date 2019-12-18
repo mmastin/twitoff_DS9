@@ -8,7 +8,7 @@ class User(DB.Model):
     name = DB.Column(DB.String(15), nullable=False)
     newest_tweet_id = DB.Column(DB.BigInteger)
     def __repr__(self):
-        return '<User {}>'.format(self.name)
+        return f'<User {self.name}>'
 
 class Tweet(DB.Model):
     """Tweets we pull"""
@@ -20,4 +20,4 @@ class Tweet(DB.Model):
     embedding = DB.Column(DB.PickleType, nullable=False)
 
     def __repr__(self):
-        return '<Tweet {}>'.format(self.text)
+        return f'<Tweet {self.text}>'
